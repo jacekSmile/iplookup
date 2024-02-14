@@ -88,5 +88,5 @@ jobs:
           files: |
             target/aarch64-unknown-linux-gnu/release/iplookup
     env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.TOKEN }}
         GITHUB_REPOSITORY: ${{ github.repository }}
