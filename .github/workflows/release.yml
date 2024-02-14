@@ -1,8 +1,9 @@
 name: Release binaries for all platforms
 
 on:
-  push:
-    branches: [main]
+    push:
+        tags:
+            - "v*.*.*"
 
 env:
   CARGO_TERM_COLOR: always
