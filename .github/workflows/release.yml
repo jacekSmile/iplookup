@@ -40,8 +40,7 @@ jobs:
 
       - name: Build release
         run: cargo build --release --target aarch64-apple-darwin
-      - name: look by ls
-        run: ls -R target
+
       - name: Compression
         run: zip -j iplookup_macos_arm64.zip target/aarch64-apple-darwin/release/iplookup
 
