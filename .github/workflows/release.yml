@@ -27,7 +27,7 @@ jobs:
         with:
           generate_release_notes: true
           files: |
-            target/release/iplookup.exe
+            iplookup_windows_x86_64.zip
 
   release-macos:
     runs-on: macos-11
@@ -37,9 +37,6 @@ jobs:
       - name: cargo check
         run: rustup target add aarch64-apple-darwin &&
           cargo check
-    
-      - name: look
-        run: tree .
 
       - name: Build release
         run: cargo build --release --target aarch64-apple-darwin
@@ -51,7 +48,7 @@ jobs:
         with:
           generate_release_notes: true
           files: |
-            target/release/iplookup
+            iplookup_macos_arm64.zip
 
   release-linux:
     runs-on: ubuntu-latest
@@ -61,9 +58,6 @@ jobs:
       - name: cargo check
         run: rustup target add x86_64-unknown-linux-gnu &&
           cargo check
-
-      - name: look
-        run: tree .
 
       - name: Build release
         run: cargo build --release
@@ -75,7 +69,7 @@ jobs:
         with:
           generate_release_notes: true
           files: |
-            target/release/iplookup
+            iplookup_linux_x86_64.zip
 
     env:
         GITHUB_TOKEN: ${{ secrets.TOKEN }}
