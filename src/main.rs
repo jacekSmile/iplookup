@@ -16,22 +16,22 @@ struct Args {
 
     /// The IP address to query
     /// Example: iplookup -i 127.0.0.1
-    #[arg(short, long)]
+    #[arg(short, long, verbatim_doc_comment)]
     ip: Option<std::net::IpAddr>,
 
     /// The domain to query
     /// Example: iplookup -d example.com
-    #[arg(short, long)]
+    #[arg(short, long, verbatim_doc_comment)]
     domain: Option<String>,
 
     /// The multi-ip address to query
     /// Example: iplookup -I 127.0.0.1 -I 127.0.0.1
-    #[arg(short = 'I', long)]
+    #[arg(short = 'I', long, verbatim_doc_comment)]
     multi_ip: Option<Vec<std::net::IpAddr>>,
 
     /// The multi-domain to query
     /// Example: iplookup -D example.com -D example.com
-    #[arg(short = 'D', long)]
+    #[arg(short = 'D', long, verbatim_doc_comment)]
     multi_domain: Option<Vec<String>>,
 }
 
