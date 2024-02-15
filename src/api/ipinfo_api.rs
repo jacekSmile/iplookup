@@ -76,9 +76,15 @@ pub fn get_ip_info(ip: &IpAddr) -> Result<IpInfoResponse, anyhow::Error> {
         .get(url)
         .headers(headers)
         .send()?
-        .json()?;
+        .json();
 
-    Ok(response)
+    if let Ok(response) = response {
+        return Ok(response);
+    } else {
+        // 休眠 0.1 秒，防止查询过于频繁
+        std::thread::sleep(std::time::Duration::from_millis(100));
+        return Ok(get_ip_info(ip)?)
+    }
 }
 
 pub fn get_domain_info(domain: &str) -> Result<Vec<IpInfoResponse>, reqwest::Error> {

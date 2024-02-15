@@ -47,7 +47,6 @@ fn search_ip(api: &Api, ip: &std::net::IpAddr) {
 
 fn search_domain(api: &Api, domain: &str) {
     if let Ok(result) = get_domain_info(api, domain) {
-        println!("query Domain: {}", domain);
         println!("{}", serde_json::to_string_pretty(&result).unwrap());
         return;
     } else {

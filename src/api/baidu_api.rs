@@ -66,17 +66,24 @@ pub fn get_ip_info(ip: &IpAddr) -> Result<IpInfoResponse, anyhow::Error> {
             ("ip", ip.to_string())
         ])
         .send()?
-        .json()?;
-    Ok(response)
+        .json();
+    if let Ok(response) = response {
+        return Ok(response);
+    } else {
+        // 休眠 0.1 秒，防止查询过于频繁
+        std::thread::sleep(std::time::Duration::from_millis(100));
+        return Ok(get_ip_info(ip)?)
+    }
 }
 
 pub fn get_domain_info(domain: &str) -> Result<Vec<IpInfoResponse>, reqwest::Error> {
     let ips = lookup_host(domain).unwrap();
+    println!("{:?}", ips);
     let ip_infos = ips
         .iter()
         .filter(|ip| ip.is_ipv4())
         .map(|ip: &IpAddr| {
-            get_ip_info(&ip).unwrap()
+            get_ip_info(ip).unwrap()
         })
         .collect();
 
